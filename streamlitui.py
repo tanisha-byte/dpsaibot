@@ -2,7 +2,9 @@ import os
 import tempfile
 import streamlit as st
 from streamlit_chat import message
+from dotenv import load_dotenv
 from pdfquery import PDFQuery
+load_dotenv()
 
 st.set_page_config(page_title="CoachingAI")
 
@@ -52,19 +54,22 @@ def main():
         else:
             st.session_state["pdfquery"] = None
 
+    # Remove the text input for API key
+    # if st.text_input("OpenAI API Key", value=st.session_state["OPENAI_API_KEY"], key="input_OPENAI_API_KEY", type="password"):
+
     st.header("CoachingAI")
 
-    if st.text_input("OpenAI API Key", value=st.session_state["OPENAI_API_KEY"], key="input_OPENAI_API_KEY", type="password"):
-        if (
-            len(st.session_state["input_OPENAI_API_KEY"]) > 0
-            and st.session_state["input_OPENAI_API_KEY"] != st.session_state["OPENAI_API_KEY"]
-        ):
-            st.session_state["OPENAI_API_KEY"] = st.session_state["input_OPENAI_API_KEY"]
-            if st.session_state["pdfquery"] is not None:
-                st.warning("Please, upload the files again.")
-            st.session_state["messages"] = []
-            st.session_state["user_input"] = ""
-            st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
+    # Remove the conditional block related to input_OPENAI_API_KEY
+    # if (
+    #     len(st.session_state["input_OPENAI_API_KEY"]) > 0
+    #     and st.session_state["input_OPENAI_API_KEY"] != st.session_state["OPENAI_API_KEY"]
+    # ):
+    #     st.session_state["OPENAI_API_KEY"] = st.session_state["input_OPENAI_API_KEY"]
+    #     if st.session_state["pdfquery"] is not None:
+    #         st.warning("Please, upload the files again.")
+    #     st.session_state["messages"] = []
+    #     st.session_state["user_input"] = ""
+    #     st.session_state["pdfquery"] = PDFQuery(st.session_state["OPENAI_API_KEY"])
 
     st.subheader("Upload a document")
     st.file_uploader(
