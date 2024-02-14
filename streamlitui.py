@@ -78,14 +78,14 @@ def main():
         key="file_uploader",
         on_change=read_and_save_file,
         label_visibility="collapsed",
-        accept_multiple_files=True,
-        disabled=not is_openai_api_key_set(),
+        accept_multiple_files=True
+        # disabled=not is_openai_api_key_set(),
     )
 
     st.session_state["ingestion_spinner"] = st.empty()
 
     display_messages()
-    st.text_input("Message", key="user_input", disabled=not is_openai_api_key_set(), on_change=process_input)
+    st.text_input("Message", key="user_input", on_change=process_input)
 
     st.divider()
 
